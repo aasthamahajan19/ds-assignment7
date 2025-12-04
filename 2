@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n;
+    cout << "Enter size: ";
+    cin >> n;
+
+    int a[n];
+    cout << "Enter elements: ";
+    for(int i = 0; i < n; i++) cin >> a[i];
+
+    int left = 0, right = n - 1;
+
+    while(left < right){
+        int minIdx = left, maxIdx = left;
+
+        for(int i = left; i <= right; i++){
+            if(a[i] < a[minIdx]) minIdx = i;
+            if(a[i] > a[maxIdx]) maxIdx = i;
+        }
+
+        swap(a[left], a[minIdx]);
+
+        if(maxIdx == left) 
+            maxIdx = minIdx;
+
+        swap(a[right], a[maxIdx]);
+
+        left++;
+        right--;
+    }
+
+    cout << "Sorted: ";
+    for(int x : a) cout << x << " ";
+}
